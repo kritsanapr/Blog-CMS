@@ -1,15 +1,12 @@
-// Function to connect mnogodb database and export it.
 const mongoose = require("mongoose");
-const { MONGO_URI } = process.env;
-
-console.log(MONGO_URI);
+const { MONGO_URL } = process.env;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(MONGO_URI, {
+    await mongoose.set("strictQuery", true);
+    await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     });
     console.log("MongoDB connected");
   } catch (err) {

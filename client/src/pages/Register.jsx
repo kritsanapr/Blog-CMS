@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const register = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3333/api/auth/register", {
+    const response = fetch("http://localhost:3333/api/register", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
     });
+
+    if (response.ok) {
+      alert("Registered!");
+      console.log("User registered!");
+      navigate("/login");
+    } else {
+      alert("Error!");
+      console.log("Error!");
+    }
   };
 
   return (
