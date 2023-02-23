@@ -72,8 +72,13 @@ const profile = async (req, res) => {
   } catch (err) {}
 };
 
+const logout = async (req, res) => {
+  res.cookie("token", "").json("Logged out");
+};
+
 module.exports = {
   login,
   register,
   profile,
+  logout,
 };
