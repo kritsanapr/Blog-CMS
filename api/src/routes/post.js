@@ -15,8 +15,8 @@ const {
 // Update post article
 // Delete post article
 
-router.post("/post", uploadMiddleware.single("image"), create);
-router.put("/post", uploadMiddleware.single("image"), update);
+router.post("/post", uploadMiddleware.single("file"), create);
+router.put("/post", uploadMiddleware.single("file"), update);
 router.get("/post", getAll);
 router.get("/post/:id", getOne);
 router.delete("/post/:id", remove);

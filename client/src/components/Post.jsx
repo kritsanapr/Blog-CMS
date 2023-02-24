@@ -1,29 +1,32 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { formatISO9075 } from "date-fns";
 
-export default function Post() {
+export default function Post({
+  _id,
+  title,
+  summary,
+  cover,
+  content,
+  createdAt,
+  author,
+}) {
   return (
     <div className="post">
       <div className="image">
-        <img
-          src="https://techcrunch.com/wp-content/uploads/2023/01/52625345016_2165b2c4fe_c.jpg?w=850&h=492&crop=1"
-          alt=""
-        ></img>
+        <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4000/" + cover} alt="" />
+        </Link>
       </div>
       <div className="texts">
-        <h2>A peek into the future as Sam Altman sees it</h2>
+        <Link to={`/post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
         <p className="info">
-          <a herf="/" className="author">
-            Dawid Padzko
-          </a>
-          <time>2023-01-06 16:45</time>
+          <a className="author">{author.username}</a>
+          <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summary">
-          Late last week, in a rare sit-down before a small audience, this
-          editor spent an hour with Sam Altman, the former president of Y
-          Combinator and, since 2019, the CEO of OpenAI, the company he famously
-          co-founded with Elon Musk and numerous others in 2015 to develop
-          artificial intelligence for the “benefit of humanity.”
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );

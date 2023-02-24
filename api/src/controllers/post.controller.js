@@ -2,16 +2,17 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const Post = require("../models/Post.model");
+const jwt = require("jsonwebtoken");
 
 const create = async (req, res) => {
-  const { originName, path } = req.file;
-  const part = originalName.split(".");
+  const { originalname, path } = req.file;
+  const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
   const newPath = path + "." + ext;
   fs.renameSync(path, newPath);
 
   const { token } = req.cookies;
-  jwt.verify(token, secret, {}, async (err, info) => {
+  jwt.verify(token, process.env.JWT_SECRET, {}, async (err, info) => {
     if (err) throw err;
     const { title, summary, content } = req.body;
     const postDoc = await Post.create({
