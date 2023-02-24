@@ -33,6 +33,8 @@ const login = async (req, res) => {
 
     res.cookie("token", token).status(200).json({
       message: "Login successful",
+      id: userDoc._id,
+      username: userDoc.username,
       user_doc: userDoc,
       token: token,
     });
